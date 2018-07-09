@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
 })
 export class ProductService {
   private products:Array<Product>=[
-    new Product(1,'第一个商品',1.99,1.5,'描述',['苹果']),
+    new Product(1,'第一个商品',1.99,1.5,'描述',['苹果','苹果2','苹果3']),
     new Product(2,'第2个商品',1.99,3.5,'描述',['苹果']),
-    new Product(3,'第3个商品',1.99,4.5,'描述',['苹果']),
-    new Product(4,'第4个商品',1.99,3.5,'描述',['苹果']),
+    new Product(3,'第3个商品',1.99,4.5,'描述',['苹果','苹果3']),
+    new Product(4,'第4个商品',1.99,3.5,'描述',['苹果','苹果2']),
     new Product(5,'第5个商品',1.99,2.5,'描述',['苹果']),
-    new Product(6,'第6个商品',1.99,5,'描述',['苹果']),
+    new Product(6,'第6个商品',1.99,5,'描述',['苹果','苹果3']),
   ];
   private comments:Comment[]=[
     new Comment(1,1,'2018-6-6 20:20:20','张三1',3,'东西不错'),
@@ -21,6 +21,9 @@ export class ProductService {
     new Comment(6,1,'2018-6-6 20:20:20','张三6',3,'东西不错'),
   ];
   constructor() { }
+  getAllCategories():string[]{
+    return ['苹果','苹果2','苹果3']
+  }
   getProducts():Product[]{
     return this.products;
   }
