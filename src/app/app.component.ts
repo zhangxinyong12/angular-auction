@@ -16,14 +16,14 @@ export class AppComponent  implements OnInit{
   constructor(
     private http:HttpClient
   ){
-    const url="/api/product/2";
+    const url="http://localhost:8000/api/product/2";
     let myHeaders:HttpHeaders=new HttpHeaders({
       'Authorization': 'my-auth-token',
       // 'Origin':'http://localhost:8000',
       // 'Access-Control-Allow-Origin':'*'
       
     });
-    this.dataSource=this.http.get(url,{headers:myHeaders});
+    this.dataSource=this.http.get(url,);
   }
   ngOnInit(){
     this.dataSource.subscribe((data)=>{
