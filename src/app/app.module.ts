@@ -15,6 +15,7 @@ import { ProductService } from './shared/product.service';
 import { MultiplPipe } from './pipe/multipl.pipe';
 import { ProductFilterPipe } from './pipe/product-filter.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    HttpClientModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
