@@ -6,8 +6,8 @@
 // console.log('启动成功')
 var express = require('express');
 var app = express();
+var WebSocketServer = require('ws');
 app.all('*', function (req, res, next) {
-    console.log(res.params);
     // res.header("Access-Control-Allow-Origin", "*");
     // res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
     // res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
@@ -52,7 +52,7 @@ app.get('/api/product/:id', function (req, res) {
         ;
         return arr;
     });
-    res.header("Access-Control-Allow-Origin", "*");
+    //添加请求头 允许跨域
     res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
     res.header("X-Powered-By", ' 3.2.1');
@@ -60,4 +60,25 @@ app.get('/api/product/:id', function (req, res) {
 });
 var server = app.listen(8000, 'localhost', function () {
     console.log('服务启动成功----------');
+});
+var wss = new WebSocketServer.Server({
+    port: 8989
+});
+wss.on('connection', function (ws) {
+    ws.on('message', function (message) {
+        console.log('服务端接收到的数据' + message);
+        var _loop_1 = function (i) {
+            setTimeout(function () {
+                if (i > 5) {
+                    ws.terminate();
+                }
+                ws.send('接收消息，发送给客户端' + i);
+            }, i * 1000);
+        };
+        for (var i = 0; i < 10; i++) {
+            _loop_1(i);
+        }
+        ;
+    });
+    ws.send('第一次接收，建立连接');
 });

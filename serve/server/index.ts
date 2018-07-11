@@ -6,6 +6,7 @@
 // console.log('启动成功')
 const express = require('express');
 const app = express();
+const WebSocketServer = require('ws');
 app.all('*', function(req, res, next) {
     // res.header("Access-Control-Allow-Origin", "*");
     // res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
@@ -58,3 +59,21 @@ app.get('/api/product/:id',(req,res)=>{
 const server = app.listen(8000, 'localhost', () => {
     console.log('服务启动成功----------');
 });
+const wss =new WebSocketServer.Server({
+    port:8989
+});
+wss.on('connection',ws=>{
+    ws.on('message',(message)=>{
+        console.log('服务端接收到的数据'+message);
+        for(let i=0;i<10;i++){
+            setTimeout(()=>{
+                if(i>5){
+                    ws.terminate();//关闭
+                }
+                ws.send('接收消息，发送给客户端'+i);
+            },i*1000)
+        };
+        
+    })
+    ws.send('第一次接收，建立连接');
+})

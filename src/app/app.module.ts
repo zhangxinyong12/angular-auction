@@ -16,6 +16,8 @@ import { MultiplPipe } from './pipe/multipl.pipe';
 import { ProductFilterPipe } from './pipe/product-filter.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { WebsocketComponent } from './websocket/websocket.component';
+import { WsServiceService } from './shared/ws-service.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     ProductDetailComponent,
     HomeComponent,
     MultiplPipe,
-    ProductFilterPipe
+    ProductFilterPipe,
+    WebsocketComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [ProductService],
+  providers: [ProductService,WsServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
